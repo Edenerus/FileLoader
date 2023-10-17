@@ -53,8 +53,8 @@ services:
     container_name: file_loader_celery
     restart: on-failure
     command: bash -c "sleep 5 && python -m celery -A config worker -l info"
-    env_file:
-      - .env
+    environment:
+      DB_HOST: db
     depends_on:
       - web
 
