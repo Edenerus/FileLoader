@@ -10,6 +10,7 @@ WORKDIR /app/
 
 COPY poetry.lock .
 COPY pyproject.toml .
+COPY .env .
 
 RUN apt -y update \
     && pip install --upgrade pip \
