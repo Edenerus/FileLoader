@@ -6,12 +6,19 @@ ENV PATH $POETRY_HOME/bin:$PATH
 ENV POETRY_VIRTUALENVS_CREATE=false
 ENV POETRY_VERSION=1.6.1
 
-COPY poetry.lock pyproject.toml app/
-WORKDIR /app
+WORKDIR /app/
+
+COPY poetry.lock .
+COPY pyproject.toml .
 
 RUN apt -y update \
     && pip install --upgrade pip \
     && pip install --no-cache-dir "poetry==$POETRY_VERSION" \
+    && poetry config virtualenvs.create false \
     && poetry install --no-root
 
-COPY . /app
+COPY . .
+
+EXPOSE 8000
+
+CMD ["gunicorn", "todolist.wsgi", "-w", "4", "-b", "0.0.0.0:8000"]
