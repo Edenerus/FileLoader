@@ -1,5 +1,10 @@
-local.yaml
-.pre-commit-config.yaml
-.gitignore
-README.md
-/tests
+#ignore all
+**
+
+#excepts
+!config/**
+!file/**
+!manage.py
+!poetry.lock
+!pyproject.toml
+!entrypoint.sh
