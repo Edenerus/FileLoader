@@ -12,6 +12,8 @@ services:
     volumes:
       - ./app/:/usr/src/app/
     restart: always
+    env_file:
+      - ./app/.env
     depends_on:
       db:
         condition: service_healthy
@@ -20,8 +22,6 @@ services:
     container_name: fileloader-db
     image: postgres:14.6-alpine
     restart: always
-    env_file:
-      - /app/.env
     environment:
       POSTGRES_HOST_AUTH_METHOD: ${POSTGRES_HOST_AUTH_METHOD}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
