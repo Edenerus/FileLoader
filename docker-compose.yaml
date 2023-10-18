@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   web:
-    build: .
+    image: edenerus/fileloader:latest
     container_name: file_loader_app
     command: >
       bash -c "sleep 5 &&
@@ -11,16 +11,12 @@ services:
       python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./app/:/usr/src/app/
-    ports:
-      - "8000:8000"
+    restart: always
     env_file:
       - .env
-    environment:
-      DB_HOST: db
     depends_on:
       db:
         condition: service_healthy
-    restart: always
 
   db:
     container_name: fileloader-db
