@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: |
         docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/fileloader:latest
-        docker-compose up -d
+        docker-compose up --build -d
